@@ -1,0 +1,88 @@
+/* Reset */
+html,
+body {
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Button */
+.button {
+  text-transform: uppercase;
+  letter-spacing: 3.1px;
+  text-align: center;
+  padding: 0.5em 2em;
+  border-radius: 18px;
+  display: inline-block;
+}
+
+.button:after {
+  content: "";
+  width: 0;
+  left: 50%;
+  position: absolute;
+  transition: all 0.3s ease;
+  background: #777;
+}
+
+.button:hover:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transition: all 0.5s ease;
+}
+
+.button-outline {
+  border: solid 1px #000000;
+  background: transparent;
+}
+
+.button:after {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+a.button {
+  text-decoration: none;
+  position: relative;
+  color: #000000;
+  border-bottom: 2px solid;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+/* Utils */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.block {
+  display: block;
+}
+
+.my-5 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* Header com bordar arredondada */
+.header {
+  position: relative;
+  height: 270px;
+  background: #333;
+  border-bottom-left-radius: 50% 40%;
+  border-bottom-right-radius: 50% 40%;
+}
