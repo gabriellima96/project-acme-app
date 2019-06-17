@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
-  Spin, Icon, Badge, Typography, Alert, Button,
+  Spin, Icon, Badge, Typography, Alert, Button, Input, Select,
 } from 'antd';
 import Footer from '../../components/footer';
 import * as OrderAPI from '../../services/OrderAPI';
 
 import './style.css';
+
+const { Option } = Select;
 
 class OrderFilter extends Component {
   state = {
@@ -25,8 +28,12 @@ class OrderFilter extends Component {
     await this.loadData();
   }
 
-  loadData = async () => {
+  loadData = async (isQuery) => {
     const { query, orders } = this.state;
+    if (isQuery) {
+      query.page = 0;
+    }
+
     const response = await OrderAPI.getAll(query);
 
     console.log(response);
@@ -38,11 +45,18 @@ class OrderFilter extends Component {
         totalPages,
       } = response;
 
+      console.log(query.page);
+      if (query.page === 0) {
+        this.setState({ orders: content });
+        query.page = 0;
+      } else {
+        query.page = pageNumber;
+        this.setState({ orders: orders.concat(content) });
+      }
+
       query.page = pageNumber;
-      const newOrders = orders.concat(content);
 
       this.setState({
-        orders: newOrders,
         totalElements,
         offset,
         query,
@@ -62,19 +76,35 @@ class OrderFilter extends Component {
       return { status: 'error', text: 'REPROVADO' };
     }
 
-    return { status: 'warning', text: 'APROVADO' };
+    return { status: 'warning', text: 'PENDENTE' };
   };
 
   render() {
     const {
       loading, orders, offset, totalElements, totalPages, query,
     } = this.state;
-    const numberElements = +totalElements - +offset;
+    const numberOffset = +offset ? +offset : 1;
+    const numberElements = +totalElements - numberOffset;
     return (
       <>
         <header className="header">
-          <h1>ACME</h1>
+          <h1>
+            <Link to="/">ACME</Link>
+          </h1>
           <p>Plataforma de aprovação de fluxo de compras</p>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/solicitante">Solicitante</Link>
+              </li>
+              <li>
+                <Link to="/administrativo">Administrativo</Link>
+              </li>
+              <li>
+                <Link to="/almoxarife">Almoxarife</Link>
+              </li>
+            </ul>
+          </nav>
         </header>
         <section className="container">
           <header>
@@ -82,15 +112,72 @@ class OrderFilter extends Component {
           </header>
           <main className="container-main filter">
             <div className="filter-infos">
-              <h1>Hello</h1>
+              <Input.Search
+                placeholder="Pesquisa por solicitante"
+                className="my-5"
+                onSearch={(value) => {
+                  if (value) {
+                    query.requester = value;
+                  } else {
+                    delete query.requester;
+                  }
+
+                  const newQuery = { page: 0, ...query };
+                  const state = { query: newQuery, ...this.state };
+                  this.setState(state, () => {
+                    this.loadData('query');
+                  });
+                }}
+              />
+              <Input.Search
+                placeholder="Pesquisa por produto"
+                className="my-5"
+                onSearch={(value) => {
+                  if (value) {
+                    query.product = value;
+                  } else {
+                    delete query.product;
+                  }
+
+                  const newQuery = { page: 0, ...query };
+                  const state = { query: newQuery, ...this.state };
+                  this.setState(state, () => {
+                    this.loadData('query');
+                  });
+                }}
+              />
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder="Pesquisar por status"
+                optionFilterProp="children"
+                onChange={(value) => {
+                  if (value) {
+                    query.status = value;
+                  } else {
+                    delete query.status;
+                  }
+
+                  const newQuery = { page: 0, ...query };
+                  const state = { query: newQuery, ...this.state };
+                  this.setState(state, () => {
+                    this.loadData('query');
+                  });
+                }}
+              >
+                <Option value="">SELECIONE</Option>
+                <Option value="APPROVED">APROVADO</Option>
+                <Option value="DENIED">REPROVADO</Option>
+                <Option value="PENDING">PENDENTE</Option>
+              </Select>
             </div>
-            <div className="order-list">
+            <div className="order-list my-5">
               {loading ? (
                 <Spin size="large" indicator={<Icon type="loading" spin />} />
               ) : (
                 orders.map(o => (
                   <div
-                    key={o.id}
+                    key={o.id.toString()}
                     className="order-card box-shadow"
                     style={{ padding: 30, display: 'flex' }}
                   >
@@ -100,15 +187,21 @@ class OrderFilter extends Component {
                       </div>
                       <div className="order-info">
                         <Typography.Title className="requester" level={3}>
-                          {o.product.requester}
+                          {o.requester}
                         </Typography.Title>
                         <div>
                           <Typography.Title level={4}>{o.product.description}</Typography.Title>
-                          <p>{o.product.price}</p>
+                          <p>
+                            {`R$ ${o.product.price}`
+                              .replace(/\./g, ',')
+                              .replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+                          </p>
                         </div>
                       </div>
                     </div>
-                    {o.status === 'DENIED' && <Alert message={o.note} type="error" />}
+                    {o.status === 'DENIED' && (
+                      <Alert message={o.note} type="error" style={{ maxWidth: 300 }} />
+                    )}
                   </div>
                 ))
               )}

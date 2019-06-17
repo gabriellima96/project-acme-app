@@ -7,7 +7,9 @@ import './style.css';
 const Home = () => (
   <>
     <header className="header">
-      <h1>ACME</h1>
+      <h1>
+        <Link to="/">ACME</Link>
+      </h1>
       <p>Plataforma de aprovação de fluxo de compras</p>
     </header>
     <section className="container">
