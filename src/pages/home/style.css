@@ -1,6 +1,16 @@
+.container header h2 {
+  text-align: center;
+}
+
+.container-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .header h1 {
   margin: 0;
-  padding-top: 100px;
+  padding-top: 3%;
   text-align: center;
   color: #fff;
 }
@@ -8,9 +18,5 @@
 .header p {
   margin: 0;
   color: #fff;
-  text-align: center;
-}
-
-.container header h2 {
   text-align: center;
 }

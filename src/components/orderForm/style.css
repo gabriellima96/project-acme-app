@@ -1,0 +1,22 @@
+.order {
+  padding: 20px;
+  background: white;
+}
+
+@media (min-width: 768px) {
+  .order {
+    margin: 20px;
+    border: 1px solid #d5d8df;
+    border-radius: 4px;
+  }
+}
+
+@media (min-width: 769px) {
+  .order {
+    margin: 20px;
+    border: 1px solid #d5d8df;
+    border-radius: 4px;
+    width: 700px;
+    margin: 0 auto;
+  }
+}

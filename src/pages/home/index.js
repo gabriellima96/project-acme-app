@@ -14,7 +14,7 @@ const Home = () => (
       <header>
         <h2>Você deseja entrar como?</h2>
       </header>
-      <main className="center">
+      <main className="container-main">
         <ul>
           <li>
             <Link to="/solicitante" className="button button-outline block">
