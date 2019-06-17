@@ -1,0 +1,51 @@
+.filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+}
+
+.order-card {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.order-card-box {
+  display: flex;
+  margin: 0 10px;
+}
+
+.order-card-box > div {
+  margin: 0 15px;
+  text-align: center;
+}
+
+.order-status {
+  width: 100px;
+}
+
+.order-info {
+  max-width: 400px;
+}
+
+.order-product div {
+  margin: 0px;
+  padding: 0px;
+}
+
+.requester {
+  margin: 0 !important;
+  padding: 0;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+}

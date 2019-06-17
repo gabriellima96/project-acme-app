@@ -12,10 +12,16 @@ class OrderForm extends Component {
   state = {
     message: '',
     type: '',
+    loading: false,
+  };
+
+  enterLoading = () => {
+    this.setState({ loading: true });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
+    this.setState({ loading: true });
     const { form } = this.props;
     form.validateFields(async (err, values) => {
       if (!err) {
@@ -38,10 +44,11 @@ class OrderForm extends Component {
         }
       }
     });
+    this.setState({ loading: false });
   };
 
   render() {
-    const { message, type } = this.state;
+    const { message, type, loading } = this.state;
     const {
       form: { getFieldDecorator },
     } = this.props;
@@ -92,7 +99,15 @@ class OrderForm extends Component {
               </Form.Item>
             </Col>
           </Row>
-          <Button block type="primary" htmlType="submit" className="my-5">
+          <Button
+            block
+            type="primary"
+            icon="upload"
+            loading={loading}
+            htmlType="submit"
+            className="my-5"
+            disabled={loading}
+          >
             Enviar
           </Button>
         </Form>
