@@ -6,8 +6,6 @@ import {
 import Footer from '../../components/footer';
 import * as OrderAPI from '../../services/OrderAPI';
 
-import './style.css';
-
 const { Option } = Select;
 
 class OrderFilter extends Component {

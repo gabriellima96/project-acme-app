@@ -6,8 +6,6 @@ import {
 
 import * as OrderAPI from '../../services/OrderAPI';
 
-import './style.css';
-
 class OrderForm extends Component {
   state = {
     message: '',

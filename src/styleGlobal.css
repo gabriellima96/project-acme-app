@@ -39,6 +39,16 @@ a {
   height: 70px;
 }
 
+.container header h2 {
+  text-align: center;
+}
+
+.container-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .footer {
   text-align: center;
 }
@@ -50,6 +60,40 @@ a {
   background: #333;
   border-bottom-left-radius: 50% 40%;
   border-bottom-right-radius: 50% 40%;
+}
+
+.header nav ul {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.header nav ul li {
+  margin: 0 10px;
+}
+
+.header nav ul li a {
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.header h1 {
+  margin: 0;
+  padding-top: 3%;
+  text-align: center;
+  color: #fff;
+}
+
+.header h1 a {
+  color: #fff;
+}
+
+.header p {
+  margin: 0;
+  color: #fff;
+  text-align: center;
 }
 
 /* button */
@@ -115,4 +159,88 @@ a.button {
 
 .text-center {
   text-align: center;
+}
+
+/*Page order filter*/
+.filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.pagination {
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+}
+
+.order-card {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.order-card-box {
+  display: flex;
+  margin: 0 10px;
+}
+
+.order-card-box > div {
+  margin: 0 15px;
+  text-align: center;
+}
+
+.order-status {
+  width: 100px;
+}
+
+.order-info {
+  max-width: 400px;
+}
+
+.order-product div {
+  margin: 0px;
+  padding: 0px;
+}
+
+.requester {
+  margin: 0 !important;
+  padding: 0;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-infos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Component orderFom*/
+.order {
+  padding: 20px;
+  background: white;
+}
+
+@media (min-width: 768px) {
+  .order {
+    margin: 20px;
+    border: 1px solid #d5d8df;
+    border-radius: 4px;
+  }
+}
+
+@media (min-width: 769px) {
+  .order {
+    margin: 20px;
+    border: 1px solid #d5d8df;
+    border-radius: 4px;
+    width: 700px;
+    margin: 0 auto;
+  }
 }
